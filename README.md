@@ -1,5 +1,9 @@
 # go-cql-query-builder
-📇 a super tiny query builder for cassandra, made in go
+📇 a super tiny query builder for cassandra, made in go  
+
+## To do
+- [ ] Add UPDATE support
+- [X] Add DELETE support
 
 ## Usage
 ```go
