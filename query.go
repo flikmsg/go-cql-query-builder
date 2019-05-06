@@ -55,6 +55,32 @@ func Insert(table string, query map[string]interface{}) *gocql.Query {
 	return Conn.Query(builder.String(), values...)
 }
 
+// Update creates an update statement.
+func Update(table string, query map[string]interface{}, changes map[string]interface{}) *gocql.Query {
+	var builder strings.Builder
+
+	builder.WriteString("UPDATE ")
+	builder.WriteString(table)
+	builder.WriteString(" SET ")
+
+	var changeFields []string
+	var values []interface{}
+	for k, v := range changes {
+		changeFields = append(changeFields, fmt.Sprintf("%s=?", k))
+		values = append(values, v)
+	}
+	builder.WriteString(strings.Join(changeFields, ","))
+	builder.WriteString(" WHERE ")
+	var queryFields []string
+	for k, v := range query {
+		changeFields = append(queryFields, fmt.Sprintf("%s=?", k))
+		values = append(values, v)
+	}
+	builder.WriteString(strings.Join(queryFields, ","))
+
+	return Conn.Query(builder.String(), values...)
+}
+
 // Delete creates an insert statement.
 func Delete(table string, query map[string]interface{}) *gocql.Query {
 	var builder strings.Builder
