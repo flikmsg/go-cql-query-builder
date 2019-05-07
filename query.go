@@ -76,7 +76,7 @@ func Update(table string, query map[string]interface{}, changes map[string]inter
 		queryFields = append(queryFields, fmt.Sprintf("%s=?", k))
 		values = append(values, v)
 	}
-	builder.WriteString(strings.Join(queryFields, ","))
+	builder.WriteString(strings.Join(queryFields, " AND "))
 
 	return Conn.Query(builder.String(), values...)
 }
