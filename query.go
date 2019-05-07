@@ -73,7 +73,7 @@ func Update(table string, query map[string]interface{}, changes map[string]inter
 	builder.WriteString(" WHERE ")
 	var queryFields []string
 	for k, v := range query {
-		changeFields = append(queryFields, fmt.Sprintf("%s=?", k))
+		queryFields = append(queryFields, fmt.Sprintf("%s=?", k))
 		values = append(values, v)
 	}
 	builder.WriteString(strings.Join(queryFields, ","))
